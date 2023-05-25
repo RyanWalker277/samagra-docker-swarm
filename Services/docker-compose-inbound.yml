@@ -1,0 +1,15 @@
+yml
+version: "3"
+
+services:
+  inbound:
+    image: "samagragovernance/inbound:${CURRENT_VERSION}"
+    env_file: .env
+    ports:
+      - "0.0.0.0:${INBOUND_EXTERNAL_PORT}:${INBOUND_INTERNAL_PORT}"
+    networks:
+      uci-overlay:
+
+networks:
+  uci-overlay:
+    external: true

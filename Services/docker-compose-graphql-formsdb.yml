@@ -1,0 +1,19 @@
+yml
+version: "3"
+
+services:
+  graphql-formsdb:
+    image: hasura/graphql-engine:latest
+    ports:
+      - "15002:8080"
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgresql:${FORMS_DB_PASSWORD}@${FORMS_DB_HOST}:${FORMS_DB_PORT}/formsdb
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      HASURA_GRAPHQL_ADMIN_SECRET: ${FORMS_DB_GRAPHQL_SECRET}
+    networks:
+      uci-overlay:
+
+networks:
+  uci-overlay:
+    external: true

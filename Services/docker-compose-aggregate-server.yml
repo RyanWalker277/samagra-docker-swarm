@@ -1,0 +1,24 @@
+yml
+version: "3"
+
+services:
+  aggregate-server:
+    image: tomcat:alpine
+    environment:
+      - DB_USERNAME=${ODK_POSTGRES_USER}
+      - DB_SCHEMA=public
+      - DB_PASSWORD=${ODK_POSTGRES_PASSWORD}
+      - DB_NAME=${ODK_POSTGRES_DB}
+      - DB_PORT=5432
+      - AGGREGATE_HOST=
+      - DB_URL=jdbc:postgresql://${ODK_POSTGRES_HOST}/${ODK_POSTGRES_DB}?user=${ODK_POSTGRES_USER}&password=${ODK_POSTGRES_PASSWORD}
+    ports:
+      - 8080:8080
+    volumes:
+      - ./odk-aggregate/odk/webapps:/usr/local/tomcat/webapps
+    networks:
+      uci-overlay:
+
+networks:
+  uci-overlay:
+    external: true

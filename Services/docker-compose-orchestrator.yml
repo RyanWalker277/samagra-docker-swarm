@@ -1,0 +1,15 @@
+yml
+version: "3"
+
+services:
+  orchestrator:
+    image: "samagragovernance/orchestrator:${CURRENT_VERSION}"
+    env_file: .env
+    ports:
+      - "${ORCHESTRATOR_INTERNAL_PORT}:${ORCHESTRATOR_INTERNAL_PORT}"
+    networks:
+      uci-overlay:
+
+networks:
+  uci-overlay:
+    external: true

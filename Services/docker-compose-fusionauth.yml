@@ -1,0 +1,29 @@
+yml
+version: "3"
+
+services:
+  fusionauth:
+    image: fusionauth/fusionauth-app:latest
+    environment:
+      DATABASE_URL: jdbc:postgresql://${FUSIONAUTH_DB_URL}/fusionauth
+      DATABASE_ROOT_USERNAME: ${FUSIONAUTH_POSTGRES_USER}
+      DATABASE_ROOT_PASSWORD: ${FUSIONAUTH_POSTGRES_PASSWORD}
+      DATABASE_USERNAME: ${FUSIONAUTH_DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${FUSIONAUTH_DATABASE_PASSWORD}
+      FUSIONAUTH_SEARCH_ENGINE_TYPE: elasticsearch
+      FUSIONAUTH_SEARCH_SERVERS: http://elastic:${ELASTIC_PASSWORD}@${ES_HOST}
+      FUSIONAUTH_URL: http://fusionauth:9011
+      FUSIONAUTH_API_KEY: ${FUSIONAUTH_API_KEY}
+      FUSIONAUTH_APP_KICKSTART_FILE: ${FUSIONAUTH_APP_KICKSTART_FILE}
+      FUSIONAUTH_ADMIN_EMAIL: ${FUSIONAUTH_ADMIN_EMAIL}
+      FUSIONAUTH_ADMIN_PASSWORD: ${FUSIONAUTH_ADMIN_PASSWORD}
+    ports:
+      - 9011:9011
+    volumes:
+      - ./kickstart:/usr/local/fusionauth/kickstart
+    networks:
+      uci-overlay:
+
+networks:
+  uci-overlay:
+    external: true

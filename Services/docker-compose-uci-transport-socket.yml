@@ -1,0 +1,20 @@
+yml
+version: "3"
+
+services:
+# UCI PWA Adapter
+  uci-transport-socket:
+    image: samagragovernance/uci-transport-socket:v2.1.8
+    environment:
+      REDIS_HOST: ${TRANSPORT_SOCKET_CACHE_HOST}
+      REDIS_PORT: ${TRANSPORT_SOCKET_CACHE_PORT}
+      SERVER_PORT: 3005
+      ADAPTER_URL: "http://inbound:8085/pwa/web"
+    ports:
+      - 3005:3005
+    networks:
+      uci-overlay:
+
+networks:
+  uci-overlay:
+    external: true

@@ -1,0 +1,15 @@
+yml
+version: "3"
+
+services:
+  broadcast-transformer:
+    image: "samagragovernance/broadcast-transformer:${CURRENT_VERSION}"
+    env_file: .env
+    ports:
+      - "${BROADCAST_TRANSFORMER_INTERNAL_PORT}:${BROADCAST_TRANSFORMER_INTERNAL_PORT}"
+    networks:
+      uci-overlay:
+
+networks:
+  uci-overlay:
+    external: true

@@ -1,0 +1,17 @@
+yml
+version: "3"
+
+services:
+# UCI API
+  uci-api-service:
+    build: ./uci-apis/v2/uci
+    image: federation-service
+    env_file: .env
+    ports:
+      - 9999:3002
+    networks:
+      uci-overlay:
+
+networks:
+  uci-overlay:
+    external: true
