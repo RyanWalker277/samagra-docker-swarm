@@ -1,8 +1,7 @@
-yml
 version: "3"
 
 services:
-# UCI API
+  # UCI API
   uci-api-service:
     build: ./uci-apis/v2/uci
     image: federation-service
@@ -10,7 +9,7 @@ services:
     ports:
       - 9999:3002
     networks:
-      uci-overlay:
+      - uci-overlay
 
 networks:
   uci-overlay:
